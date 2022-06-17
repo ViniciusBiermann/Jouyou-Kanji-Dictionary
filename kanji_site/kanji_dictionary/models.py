@@ -25,13 +25,13 @@ class Kanji(models.Model):
     old_character = models.CharField(max_length=2, help_text='The old kanji character.')
     radical = models.ForeignKey('Radical', on_delete=models.SET_NULL, null=True)
     strokes = models.IntegerField(help_text='Number of strokes.')
-    grade = models.IntegerField(help_text='Grade the kanji is taught.')
+    grade = models.CharField(max_length=200, help_text='Grade the kanji is taught.')
     meaning = models.CharField(max_length=200, help_text='The meaning of the kanji.')
     kun_yomi = models.CharField(max_length=200, help_text='The kun yomi reading of the kanji.')
     kun_romaji = models.CharField(max_length=200, help_text='The kun yomi reading of the kanji in romaji.')
     on_yomi = models.CharField(max_length=200, help_text='The on yomi reading of the kanji.')
     on_romaji = models.CharField(max_length=200, help_text='The on yomi reading of the kanji in romaji.')
-    klc_index = models.IntegerField(help_text="Index of the kanji in Kodansha's Kanji Learner's Course book.")
+    klc_index = models.IntegerField(help_text="Index of the kanji in Kodansha's Kanji Learner's Course book.", null=True)
 
     class Meta:
         ordering = ['id', 'strokes', 'grade', 'klc_index']

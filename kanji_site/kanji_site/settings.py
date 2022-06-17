@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'kanji_dictionary.apps.KanjiDictionaryConfig'
+    'kanji_dictionary.apps.KanjiDictionaryConfig',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [

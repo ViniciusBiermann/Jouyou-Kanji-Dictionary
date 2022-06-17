@@ -34,8 +34,8 @@ def extract_readings(reading_field: list):
     return all_readings
 
 
-with open('kanji_table.csv', 'w', encoding='UTF8') as csv_file:
-    header = f"id;Kanji;Old Kanji;Radical;Strokes;Grade;Meanings;Kun yomi;Kun romaji;On yomi;On romaji\n"
+with open('Kanji/kanji_site/scripts/csv_files/kanji_table.csv', 'w', encoding='UTF8') as csv_file:
+    header = f"id,Kanji,Old Kanji,Radical,Strokes,Grade,Meanings,Kun yomi,Kun romaji,On yomi,On romaji\n"
     csv_file.write(header)
 
     for tr in table.find_all('tr'):
@@ -50,6 +50,6 @@ with open('kanji_table.csv', 'w', encoding='UTF8') as csv_file:
         grade = tds[5].text.strip()
         meaning = tds[7].text.strip()
         readings = extract_readings(tds[8].contents)
-        row = f"{index};{kanji};{old_kanji};{radical};{strokes};{grade};{meaning};{', '.join(readings['kun'])};" \
-              f"{', '.join(readings['kun_romaji'])};{', '.join(readings['on'])};{', '.join(readings['on_romaji'])}\n"
+        row = f"{index},{kanji},{old_kanji},{radical},{strokes},{grade},\"{meaning}\",\"{', '.join(readings['kun'])}\"," \
+              f"\"{', '.join(readings['kun_romaji'])}\",\"{', '.join(readings['on'])}\",\"{', '.join(readings['on_romaji'])}\"\n"
         csv_file.write(row)
