@@ -43,9 +43,9 @@ with open('Kanji/kanji_site/scripts/csv_files/kanji_table.csv', 'w', encoding='U
         if not tds:
             continue
         index = tds[0].text.strip()
-        kanji = clean_value(tds[1].text)
-        old_kanji = clean_value(tds[2].text)
-        radical = tds[3].text.strip()
+        kanji = unicodedata.normalize('NFKC', clean_value(tds[1].text))
+        old_kanji = unicodedata.normalize('NFKC', clean_value(tds[2].text))
+        radical = unicodedata.normalize('NFKC', tds[3].text.strip())
         strokes = tds[4].text.strip()
         grade = tds[5].text.strip()
         meaning = tds[7].text.strip()

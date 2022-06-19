@@ -1,4 +1,5 @@
 import csv
+import unicodedata
 
 from kanji_dictionary.models import Radical
 
@@ -11,10 +12,9 @@ def run():
         Radical.objects.all().delete()
 
         for row in reader:
-            print(row)
             radical_id = row[0]
             strokes = row[1]
-            character = row[2]
+            character = unicodedata.normalize('NFKC', row[2])
             meaning = row[3]
             japanese_reading = row[4]
             romaji_reading = row[5]
