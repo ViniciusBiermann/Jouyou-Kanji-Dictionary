@@ -1,0 +1,23 @@
+body {
+    background-color: #15151E;
+    font-size: 12pt;
+    font-family: Arial, Helvetica, sans-serif;
+    color: whitesmoke;
+}
+
+
+.site-header .navbar-nav .nav-link {
+  color: #cbd5db;
+}
+
+.site-header .navbar-nav .nav-link:hover {
+  color: whitesmoke;
+}
+
+.col-lg-10 {
+  padding-top: 2rem
+}
+
+
+
+
