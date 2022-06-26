@@ -10,4 +10,4 @@ def about(request):
 
 
 def kanji_list(request):
-    return render(request, 'kanji_dictionary/kanji_list.html')
+    return render(request, 'kanji_dictionary/kanji-list.html')

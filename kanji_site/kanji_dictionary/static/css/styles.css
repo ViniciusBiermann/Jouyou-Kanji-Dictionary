@@ -7,16 +7,38 @@ body {
 
 
 .site-header .navbar-nav .nav-link {
-  color: #cbd5db;
+    color: #cbd5db;
 }
 
 .site-header .navbar-nav .nav-link:hover {
-  color: whitesmoke;
+    color: whitesmoke;
 }
 
 .col-lg-10 {
-  padding-top: 2rem
+    padding-top: 6rem
 }
+
+.search-bar {
+    padding-top: 4rem;
+}
+
+#search-bar-search-button {
+    color: whitesmoke;
+    padding: 10px 10%;
+    border: 1px solid grey;
+}
+
+.form-control {
+    color: whitesmoke;
+    background-color: #15151E;
+    border: 1px solid grey;
+}
+
+.form-control:focus {
+    color: whitesmoke;
+    background-color: #15151E;
+}
+
 
 
 
