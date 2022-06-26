@@ -1,0 +1,45 @@
+{% extends "kanji_dictionary/base.html" %}
+
+{% block content %}
+
+<p class="text-center" id="kanji-character">{{ kanji.character }}</p>
+
+
+<div class="row justify-content-center">
+    <p class="text-center">
+        <ruby>
+            意
+            <rt>い</rt>
+            味
+            <rt>み</rt>
+            : {{ kanji.meaning }}
+        </ruby>
+    </p>
+</div>
+<div class="row justify-content-center">
+    <div class="col">
+        <p class="text-center">
+            <ruby>
+                訓
+                <rt>くん</rt>
+                読
+                <rt>よ</rt>
+                み: {{ kanji.kun_yomi }}
+            </ruby>
+        </p>
+    </div>
+    <div class="col">
+        <p class="text-center">
+            <ruby>
+                音
+                <rt>おん</rt>
+                読
+                <rt>よ</rt>
+                み: {{ kanji.on_yomi }}
+            </ruby>
+        </p>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -39,6 +39,17 @@ body {
     background-color: #15151E;
 }
 
+#kanji-character {
+    font-size: 120px;
+    color: whitesmoke;
+    padding-bottom: 2rem;
+}
+
+ruby {
+    font-size: 30px;
+    color: whitesmoke;
+}
+
 
 
 
