@@ -3,6 +3,7 @@ import bs4.element
 import requests
 from bs4 import BeautifulSoup
 import unicodedata
+import csv
 
 page = requests.get('https://en.wikipedia.org/wiki/List_of_j%C5%8Dy%C5%8D_kanji').text
 soup = BeautifulSoup(page, 'html.parser')
@@ -34,22 +35,28 @@ def extract_readings(reading_field: list):
     return all_readings
 
 
-with open('Kanji/kanji_site/scripts/csv_files/kanji_table.csv', 'w', encoding='UTF8') as csv_file:
-    header = f"id,Kanji,Old Kanji,Radical,Strokes,Grade,Meanings,Kun yomi,Kun romaji,On yomi,On romaji\n"
-    csv_file.write(header)
+with open('Kanji/kanji_site/scripts/csv_files/kanji_table.csv', 'w', encoding='UTF8') as csv_file, \
+        open('Kanji/kanji_site/scripts/csv_files/Kanji_database_table.csv', 'r', encoding='UTF8') as kanji_db:
+    header = ['id', 'Kanji', 'Old Kanji', 'Radical', 'Strokes', 'Grade', 'JLPT', 'Meanings',
+              'Kun yomi', 'Kun romaji', 'On yomi', 'On romaji']
+    writer = csv.writer(csv_file)
+    writer.writerow(header)
+    reader = csv.DictReader(kanji_db)
 
-    for tr in table.find_all('tr'):
+    for tr, db_kanji_line in zip(table.find_all('tr')[1:], reader):
         tds = tr.find_all('td')
-        if not tds:
-            continue
         index = tds[0].text.strip()
         kanji = unicodedata.normalize('NFKC', clean_value(tds[1].text))
         old_kanji = unicodedata.normalize('NFKC', clean_value(tds[2].text))
-        radical = unicodedata.normalize('NFKC', tds[3].text.strip())
+        if index == '1814':
+            radical = unicodedata.normalize('NFKC', '廾')
+        else:
+            radical = unicodedata.normalize('NFKC', tds[3].text.strip())
         strokes = tds[4].text.strip()
         grade = tds[5].text.strip()
         meaning = tds[7].text.strip()
         readings = extract_readings(tds[8].contents)
-        row = f"{index},{kanji},{old_kanji},{radical},{strokes},{grade},\"{meaning}\",\"{', '.join(readings['kun'])}\"," \
-              f"\"{', '.join(readings['kun_romaji'])}\",\"{', '.join(readings['on'])}\",\"{', '.join(readings['on_romaji'])}\"\n"
-        csv_file.write(row)
+        jlpt_level = db_kanji_line.get('JLPT-test', '--')
+        row = [index, kanji, f"{', '.join(old_kanji)}", radical, strokes, grade, jlpt_level, f"{meaning}", f"{', '.join(readings['kun'])}",
+               f"{', '.join(readings['kun_romaji'])}", f"{', '.join(readings['on'])}", f"{', '.join(readings['on_romaji'])}"]
+        writer.writerow(row)

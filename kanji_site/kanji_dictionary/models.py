@@ -3,7 +3,7 @@ from django.urls import reverse
 
 
 class Radical(models.Model):
-    id = models.IntegerField(help_text='ID for the radical.', unique=True, primary_key=True)
+    id = models.IntegerField(help_text='ID for the radical.', primary_key=True)
     character = models.CharField(max_length=2, help_text='The radical character.')
     strokes = models.IntegerField(help_text='Number of strokes.')
     meaning = models.CharField(max_length=200, help_text='The meaning of the radical.')
@@ -20,12 +20,13 @@ class Radical(models.Model):
 
 
 class Kanji(models.Model):
-    id = models.IntegerField(help_text='ID for the kanji.', unique=True, primary_key=True)
+    id = models.IntegerField(help_text='ID for the kanji.', primary_key=True)
     character = models.CharField(max_length=2, help_text='The kanji character.')
     old_character = models.CharField(max_length=2, help_text='The old kanji character.')
     radical = models.ForeignKey('Radical', on_delete=models.SET_NULL, null=True)
     strokes = models.IntegerField(help_text='Number of strokes.')
     grade = models.CharField(max_length=200, help_text='Grade the kanji is taught.')
+    jlpt = models.IntegerField(help_text='Level where this kanji appears on the Japanese Language Proficiency Test.')
     meaning = models.CharField(max_length=200, help_text='The meaning of the kanji.')
     kun_yomi = models.CharField(max_length=200, help_text='The kun yomi reading of the kanji.')
     kun_romaji = models.CharField(max_length=200, help_text='The kun yomi reading of the kanji in romaji.')
