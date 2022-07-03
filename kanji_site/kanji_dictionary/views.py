@@ -12,12 +12,9 @@ def about(request):
     return render(request, 'kanji_dictionary/about.html')
 
 
-def kanji_list(request):
-    return render(request, 'kanji_dictionary/kanji-list.html')
-
-
-def kanji(request):
-    return render(request, 'kanji_dictionary/kanji.html')
+class KanjiListView(generic.ListView):
+    model = Kanji
+    paginate_by = 50
 
 
 class KanjiDetailView(generic.DetailView):

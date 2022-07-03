@@ -1,0 +1,16 @@
+{% extends "kanji_dictionary/base.html" %}
+
+{% block content %}
+<h1>Kanji List</h1>
+{% if kanji_list %}
+<ul>
+    {% for kanji in kanji_list %}
+    <li>
+        <a href="{{ kanji.get_absolute_url }}">{{ kanji.character }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>There are no kanjis on the database.</p>
+{% endif %}
+{% endblock %}
