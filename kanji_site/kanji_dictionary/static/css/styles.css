@@ -1,5 +1,7 @@
 body {
     background-color: #15151E;
+    background-size: auto;
+    table-layout: fixed;
     font-size: 12pt;
     font-family: Arial, Helvetica, sans-serif;
     color: whitesmoke;
@@ -10,8 +12,20 @@ body {
     color: #cbd5db;
 }
 
+.navbar-brand {
+    color: #42A5F5;
+}
+
+.navbar-brand:hover {
+    color: #42A5F5;
+}
+
 .site-header .navbar-nav .nav-link:hover {
-    color: whitesmoke;
+    color: #42A5F5;
+}
+
+.dropdown-item:focus {
+    color: #42A5F5;
 }
 
 .col-lg-10 {
@@ -45,11 +59,14 @@ body {
     padding-bottom: 2rem;
 }
 
-ruby {
-    font-size: 30px;
+p {
+    font-size: 20px;
     color: whitesmoke;
 }
 
+ruby {
+    color: #42A5F5;
+}
 
 
 

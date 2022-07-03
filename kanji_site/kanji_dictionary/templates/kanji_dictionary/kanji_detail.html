@@ -2,41 +2,95 @@
 
 {% block content %}
 
-<p class="text-center" id="kanji-character">{{ kanji.character }}</p>
 
-
-<div class="row justify-content-center">
-    <p class="text-center">
-        <ruby>
-            意
-            <rt>い</rt>
-            味
-            <rt>み</rt>
-            : {{ kanji.meaning }}
-        </ruby>
-    </p>
-</div>
-<div class="row justify-content-center">
-    <div class="col">
-        <p class="text-center">
+<div class="row">
+    <div class="col-lg col-md text-wrap">
+        <p class="text-center" id="kanji-character">{{ kanji.character }}</p>
+    </div>
+    <div class="col-lg col-md text-wrap">
+        <p class="text-left">
             <ruby>
                 訓
                 <rt>くん</rt>
                 読
                 <rt>よ</rt>
-                み: {{ kanji.kun_yomi }}
+                み:
             </ruby>
+            {{ kanji.kun_yomi }}
         </p>
     </div>
-    <div class="col">
-        <p class="text-center">
+    <div class="col-lg col-md text-wrap">
+        <p class="text-left">
             <ruby>
                 音
                 <rt>おん</rt>
                 読
                 <rt>よ</rt>
-                み: {{ kanji.on_yomi }}
+                み:
             </ruby>
+            {{ kanji.on_yomi }}
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg col-md text-wrap">
+        <p class="text-left">
+            <ruby>
+                意
+                <rt>い</rt>
+                味
+                <rt>み</rt>
+                :hmm
+            </ruby>
+            {{ kanji.meaning }}
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg col-md text-wrap">
+        <p class="text-left">
+            <ruby>
+                画
+                <rt>かく</rt>
+                数
+                <rt>すう</rt>
+                :
+            </ruby>
+            {{ kanji.strokes }}
+        </p>
+    </div>
+    <div class="col-lg col-md text-wrap">
+        <p class="text-left">
+            <ruby>
+                学
+                <rt>がく</rt>
+                年
+                <rt>ねん</rt>
+                :
+            </ruby>
+            {{ kanji.grade }}
+        </p>
+    </div>
+    <div class="col-lg col-md text-wrap">
+        <p class="text-left">
+            <ruby>
+                日
+                <rt>に</rt>
+                本
+                <rt>ほん</rt>
+                語
+                <rt>ご</rt>
+                能
+                <rt>のう</rt>
+                力
+                <rt>りょく</rt>
+                試
+                <rt>し</rt>
+                験
+                <rt>けん</rt>
+                :
+            </ruby>
+            N{{ kanji.jlpt }}
         </p>
     </div>
 </div>
