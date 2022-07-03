@@ -6,7 +6,7 @@
 <ul>
     {% for kanji in kanji_list %}
     <li>
-        <a href="{{ kanji.get_absolute_url }}">{{ kanji.character }}</a>
+        <a href="{{ kanji.get_absolute_url }}" id="kanji-list-anchor">{{ kanji.character }}</a>
     </li>
     {% endfor %}
 </ul>

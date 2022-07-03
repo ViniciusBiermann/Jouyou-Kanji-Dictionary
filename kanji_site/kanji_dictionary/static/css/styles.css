@@ -68,6 +68,12 @@ ruby {
     color: #42A5F5;
 }
 
+#kanji-list-anchor {
+    font-size: 30px;
+    text-decoration:none;
+    color: #42A5F5;
+}
+
 
 
 
