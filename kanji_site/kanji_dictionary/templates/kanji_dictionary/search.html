@@ -1,0 +1,62 @@
+{% extends "kanji_dictionary/base.html" %}
+
+{% block content %}
+{% if request.GET.search_input %}
+<h1>Search result for {{ request.GET.search_input }}</h1>
+{% else %}
+<h1>Search result</h1>
+{% endif %}
+
+{% if search_kanji_list %}
+<ul>
+    {% for kanji in search_kanji_list %}
+    <li>
+        <a href="{{ kanji.get_absolute_url }}" id="kanji-list-anchor">{{ kanji.character }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<!--{% if search_kanji_list.has_other_pages %}-->
+<!--<div class="pagination">-->
+<!--    <span class="page-links">-->
+<!--        {% if search_kanji_list.has_previous %}-->
+<!--            <a class="btn btn-outline-primary btn-md"-->
+<!--               href="?page=1{% if request.GET.search_input %}&search_input={{ request.GET.search_input }}{% endif %}">First</a>-->
+<!--            <a class="btn btn-outline-primary btn-md"-->
+<!--               href="?page={{ search_kanji_list.previous_page_number }}{% if request.GET.search_input %}&search_input={{ request.GET.search_input }}{% endif %}"-->
+<!--               aria-label="Previous"><span-->
+<!--                    aria-hidden="true">&laquo;</span>-->
+<!--            </a>-->
+<!--        {% endif %}-->
+
+<!--        {% for num in search_kanji_list.paginator.page_range %}-->
+<!--            {% if search_kanji_list.number == num %}-->
+<!--              <a class="btn btn-primary btn-md"-->
+<!--                 href="?page={{ num }}{% if request.GET.search_input %}&search_input={{ request.GET.search_input }}{% endif %}">{{ num }}</a>-->
+<!--            {% elif num > search_kanji_list.number|add:'-3' and num < search_kanji_list.number|add:'3' %}-->
+<!--              <a class="btn btn-outline-primary btn-md"-->
+<!--                 href="?page={{ num }}{% if request.GET.search_input %}&search_input={{ request.GET.search_input }}{% endif %}">{{ num }}</a>-->
+<!--            {% endif %}-->
+<!--        {% endfor %}-->
+
+<!--        {% if search_kanji_list.has_next %}-->
+<!--            <a class="btn btn-outline-primary btn-md"-->
+<!--               href="?page={{ search_kanji_list.next_page_number }}{% if request.GET.search_input %}&search_input={{ request.GET.search_input }}{% endif %}"-->
+<!--               aria-label="Next">-->
+<!--                <span aria-hidden="true">&raquo;</span>-->
+<!--            </a>-->
+<!--            <a class="btn btn-outline-primary btn-md"-->
+<!--               href="?page={{ search_kanji_list.paginator.num_pages }}{% if request.GET.search_input %}&search_input={{ request.GET.search_input }}{% endif %}">Last</a>-->
+<!--        {% endif %}-->
+<!--    </span>-->
+<!--</div>-->
+<!--{% endif %}-->
+
+{% else %}
+<p>No results on search.</p>
+{% endif %}
+
+
+{% endblock %}
+
+

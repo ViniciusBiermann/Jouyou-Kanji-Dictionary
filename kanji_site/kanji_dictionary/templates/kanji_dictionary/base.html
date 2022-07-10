@@ -59,14 +59,16 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-10">
-                <div class="search-bar input-group rounded">
-                    <input type="search" class="form-control form-control-md" placeholder="Search"
-                           aria-label="Search"
-                           aria-describedby="search-addon"/>
-                    <button id="search-bar-search-button" type="button" class="btn btn-outline-dark">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
+                <form action="{% url 'kanji-dictionary-search' %}" method="GET">
+                    <div class="search-bar input-group rounded">
+                        <input type="text" class="form-control form-control-md" placeholder="Search"
+                               aria-label="Search" name="search_input"
+                               aria-describedby="search-addon"/>
+                        <button id="search-bar-search-button" type="submit" class="btn btn-outline-dark">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -79,28 +81,33 @@
             <div class="pagination">
                 <span class="page-links">
                     {% if page_obj.has_previous %}
-                        <a class="btn btn-outline-primary btn-md" href="?page=1">First</a>
                         <a class="btn btn-outline-primary btn-md"
-                           href="?page={{ page_obj.previous_page_number }}" aria-label="Previous"><span
+                           href="?page=1{% if request.GET.search_input %}&search_input={{ request.GET.search_input }}{% endif %}">First</a>
+                        <a class="btn btn-outline-primary btn-md"
+                           href="?page={{ page_obj.previous_page_number }}{% if request.GET.search_input %}&search_input={{ request.GET.search_input }}{% endif %}"
+                           aria-label="Previous"><span
                                 aria-hidden="true">&laquo;</span>
                         </a>
                     {% endif %}
 
                     {% for num in page_obj.paginator.page_range %}
                         {% if page_obj.number == num %}
-                          <a class="btn btn-primary btn-md" href="?page={{ num }}">{{ num }}</a>
+                          <a class="btn btn-primary btn-md"
+                             href="?page={{ num }}{% if request.GET.search_input %}&search_input={{ request.GET.search_input }}{% endif %}">{{ num }}</a>
                         {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
-                          <a class="btn btn-outline-primary btn-md" href="?page={{ num }}">{{ num }}</a>
+                          <a class="btn btn-outline-primary btn-md"
+                             href="?page={{ num }}{% if request.GET.search_input %}&search_input={{ request.GET.search_input }}{% endif %}">{{ num }}</a>
                         {% endif %}
                     {% endfor %}
 
                     {% if page_obj.has_next %}
-                        <a class="btn btn-outline-primary btn-md" href="?page={{ page_obj.next_page_number }}"
+                        <a class="btn btn-outline-primary btn-md"
+                           href="?page={{ page_obj.next_page_number }}{% if request.GET.search_input %}&search_input={{ request.GET.search_input }}{% endif %}"
                            aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                         <a class="btn btn-outline-primary btn-md"
-                           href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                           href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.search_input %}&search_input={{ request.GET.search_input }}{% endif %}">Last</a>
                     {% endif %}
                 </span>
             </div>
