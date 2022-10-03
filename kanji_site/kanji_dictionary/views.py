@@ -1,5 +1,9 @@
+import unicodedata
+from functools import reduce
+import operator
 from django.shortcuts import render
 from django.views import generic
+from django.db.models import Q
 # from django.core.paginator import Paginator
 
 from .models import Kanji
@@ -30,9 +34,16 @@ class SearchResults(generic.ListView):
 
     def get_queryset(self):
         search_kanji_list = []
-        if self.request.GET.get('search_input'):
-            searched = self.request.GET.get('search_input')
-            search_kanji_list = Kanji.objects.filter(kun_yomi__icontains=searched)
+        searched = self.request.GET.get('search_input')
+        if searched:
+            kanjis = [character for character in searched if 'CJK' in unicodedata.name(character)]
+            kanji_query = reduce(operator.or_, (Q(character__icontains=item) for item in kanjis), Q(character__icontains='$'))
+            search_kanji_list = Kanji.objects.filter(
+                kanji_query
+                | Q(kun_yomi__icontains=searched)
+                | Q(on_yomi__icontains=searched)
+                | Q(meaning__icontains=searched)
+            ).distinct()
         return search_kanji_list
 
 # def search(request):
